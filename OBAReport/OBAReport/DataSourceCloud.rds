@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DataSourceCloud">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=sql5052.site4now.net;Initial Catalog=DB_A4993A_OBA</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>f4726ec8-f2ec-4cdb-a233-bd4581467b58</DataSourceID>
+</RptDataSource>

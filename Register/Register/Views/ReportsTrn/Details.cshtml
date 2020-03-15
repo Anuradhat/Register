@@ -1,0 +1,23 @@
+﻿@using System.Web.UI.WebControls
+@using ReportViewerForMvc;
+
+
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@*<iframe src= @ViewBag.ReportLink.ToString() width="100%" height="525" sandbox="allow-same-origin"></iframe>*@
+@*@Html.Partial("~/Views/ASPX/ReportViewer.aspx")*@
+
+<div style="height:800px">
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer,new { Width = Unit.Percentage(100), Height = Unit.Pixel(800),id="reportv", style = "z-index:9999" });
+</div>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("#reportv").height(800);
+    });
+</script>*@
+

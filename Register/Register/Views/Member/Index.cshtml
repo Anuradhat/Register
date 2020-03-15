@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Register.Models.MemberM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Members
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Member</a></li>
+        <li class="active">Member</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Member</h3>
+        </div>
+        <div class="box-body">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+
+            <table class="table table-bordered table-condensed table-hover table-responsive table-striped Dtable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MemberID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NIC)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NameWithInitials)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CallingName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateOfBirth)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MobileNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GCEOL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GCEAL)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MemberID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NIC)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NameWithInitials)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CallingName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateOfBirth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MobileNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GCEOL)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GCEAL)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "webReport";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section>
+    <iframe src="~/WebForm/WebFormReport.aspx?reportName=@ViewBag.reportName&serverPath=@ViewBag.serverPath&reportFolder=@ViewBag.reportFolder" style="width:1024px;height:800px"></iframe>
+</section>

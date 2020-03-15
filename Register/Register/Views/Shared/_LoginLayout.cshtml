@@ -1,0 +1,81 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Student Register | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="icon" href="~/Atlas/img/favicon.png" sizes="32x32" type="image/png">
+
+    <link href="~/AdminLte/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/AdminLte/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/AdminLte/bower_components/Ionicons/css/ionicons.css" rel="stylesheet" />
+    <link href="~/AdminLte/dist/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/AdminLte/plugins/iCheck/square/blue.css" rel="stylesheet" />
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+</head>
+<body class="hold-transition login-page" style="">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        @*<div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    
+                </section>
+            </div>
+            <div class="login-logo">
+                <a href="../../index2.html"><b>E</b>mblishment  <b>M</b>anagement  <b>S</b>ystem </a>
+            </div>
+            <!-- /.login-logo -->
+            <!-- /.login-box-body -->
+        </div>*@
+        
+        <div class="login-box">
+            @*<div class="login-logo">
+                <img src="~/Images/Logo3.png" class="img-circle" height="50" width="50" />
+            </div>*@
+            
+            <div class="login-logo">
+                <a href="#"><b>S</b>tudent <b>R</b>egister </a>
+            </div>
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                @RenderBody()
+            </div>
+            @*<a href="#">I forgot my password</a>
+            <br>
+            <a href="@Url.Action("NewMemberPlacement","User")" class="text-center">Register a new membership</a>*@
+        </div>
+        <div class="separator">
+            <div class="clearfix"></div>
+            <br />
+            <div>
+                <p><strong>Copyright &copy; 2020 <a href="#"> Harischandra Collage </a>.</strong> All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/AdminLte/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/AdminLte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/AdminLte/plugins/iCheck/icheck.min.js"></script>
+
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+</body>
+</html>
