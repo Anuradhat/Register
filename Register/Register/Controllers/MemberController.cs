@@ -14,7 +14,7 @@ namespace Register.Controllers
         clsMaritalStatus _MaritalStatus = new clsMaritalStatus();
         clsReligion _Religion = new clsReligion();
 
-        private clsMember clsMember =  new clsMember();
+        private clsMember clsMember = new clsMember();
         // GET: Member
         [Authorize(Roles = "Member - Details")]
         public ActionResult Index()
@@ -24,9 +24,20 @@ namespace Register.Controllers
         }
 
         // GET: Member/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string MemberID)
         {
-            return View();
+            MemberM _MemberDetails = clsMember.SelectAllMemberByMemberID(MemberID);
+
+            List<GenderM> GenderList = _gender.SelectAllGender();
+            ViewBag.GenderList = new SelectList(GenderList, "GenderCode", "Gender", _MemberDetails.GenderCode);
+
+            List<MaritalStatusM> MaritalStatusList = _MaritalStatus.SelectAllMaritalStatus();
+            ViewBag.MaritalStatusList = new SelectList(MaritalStatusList, "MaritalStatusCode", "MaritalStatus", _MemberDetails.MaritalStatusCode);
+
+            List<ReligionM> ReligionList = _Religion.SelectAllReligion();
+            ViewBag.ReligionList = new SelectList(ReligionList, "ReligionCode", "ReligionName", _MemberDetails.ReligionCode);
+
+            return View(_MemberDetails);
         }
 
         // GET: Member/Create
@@ -62,47 +73,79 @@ namespace Register.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
-        // GET: Member/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Member/Edit/
+        [Authorize(Roles = "Member - Edit")]
+        public ActionResult Edit(string MemberID)
         {
-            return View();
+            MemberM _MemberDetails = clsMember.SelectAllMemberByMemberID(MemberID);
+
+            List<GenderM> GenderList = _gender.SelectAllGender();
+            ViewBag.GenderList = new SelectList(GenderList, "GenderCode", "Gender", _MemberDetails.GenderCode);
+
+            List<MaritalStatusM> MaritalStatusList = _MaritalStatus.SelectAllMaritalStatus();
+            ViewBag.MaritalStatusList = new SelectList(MaritalStatusList, "MaritalStatusCode", "MaritalStatus", _MemberDetails.MaritalStatusCode);
+
+            List<ReligionM> ReligionList = _Religion.SelectAllReligion();
+            ViewBag.ReligionList = new SelectList(ReligionList, "ReligionCode", "ReligionName", _MemberDetails.ReligionCode);
+
+            return View(_MemberDetails);
         }
 
         // POST: Member/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Authorize(Roles = "Member - Edit")]
+        public ActionResult Edit(FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                var test = Convert.ToBoolean(collection["GCEAL"].Split(',')[0]);
+
+                clsMember.EditMember(collection["MemberID"], collection["NIC"], collection["FullName"], collection["NameWithInitials"],
+                    collection["CallingName"], DateTime.Parse(collection["DateOfBirth"]), collection["Marital"], collection["Gender"],
+                    collection["Religion"], collection["Address"], collection["City"], collection["Country"], int.Parse(collection["MobileNo"]),
+                    int.Parse(collection["HomeTel"]), collection["Email"], Convert.ToBoolean(collection["GCEOL"].Split(',')[0]), Convert.ToBoolean(collection["GCEAL"].Split(',')[0]),
+                    collection["OtherQualification"], Convert.ToBoolean(collection["ActiveMember"].Split(',')[0]), collection["Comments"]);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
         // GET: Member/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles = "Member - Delete")]
+        public ActionResult Delete(string MemberID)
         {
-            return View();
+            MemberM _MemberDetails = clsMember.SelectAllMemberByMemberID(MemberID);
+
+            List<GenderM> GenderList = _gender.SelectAllGender();
+            ViewBag.GenderList = new SelectList(GenderList, "GenderCode", "Gender", _MemberDetails.GenderCode);
+
+            List<MaritalStatusM> MaritalStatusList = _MaritalStatus.SelectAllMaritalStatus();
+            ViewBag.MaritalStatusList = new SelectList(MaritalStatusList, "MaritalStatusCode", "MaritalStatus", _MemberDetails.MaritalStatusCode);
+
+            List<ReligionM> ReligionList = _Religion.SelectAllReligion();
+            ViewBag.ReligionList = new SelectList(ReligionList, "ReligionCode", "ReligionName", _MemberDetails.ReligionCode);
+
+            return View(_MemberDetails);
         }
 
         // POST: Member/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Authorize(Roles = "Member - Delete")]
+        public ActionResult Delete(FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                clsMember.DeleteMember(collection["MemberID"]);
 
                 return RedirectToAction("Index");
             }

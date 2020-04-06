@@ -1,42 +1,40 @@
 ﻿@model Register.Models.MemberM
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit Member";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
 <section class="content-header">
     <h1>
-        New Members
+        Members
         <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Member</a></li>
-        <li class="active">Create Member</li>
+        <li class="active">Edit Member</li>
     </ol>
 </section>
 
 <section class="content">
     <div class="box box-default">
         <div class="box-header with-border">
-            <h3 class="box-title">Member</h3>
+            <h3 class="box-title">Edit Member</h3>
         </div>
         <div class="box-body">
-            @using (Html.BeginForm("Create", "Member", FormMethod.Post, new { id = "CreateForm" }))
+            @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.MemberID, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-4">
+                        <div class="col-md-10">
                             @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-2">
-                            <input type="submit" id="btnVerify" class="btn  btn-info" value="Verify" />
                         </div>
                     </div>
 
@@ -75,7 +73,8 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                            @*@Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @type = "date", @class = "form-control" } })*@
+                            @Html.TextBoxFor(model => model.DateOfBirth, "{0:MM/dd/yyyy}", new { @class = "col-md-2" })
                             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -83,7 +82,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.MaritalStatusCode, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownList("Marital", new SelectList(ViewBag.MaritalStatusList, "MaritalStatusCode", "MaritalStatus"), new { @class = "form-control select2" })
+                            @Html.DropDownList("Marital", (SelectList)ViewBag.MaritalStatusList, new { @class = "col-md-3 select2" })
                             @Html.ValidationMessageFor(model => model.MaritalStatusCode, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -91,7 +90,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.GenderCode, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownList("Gender", (SelectList)ViewBag.GenderList, new { @class = "form-control select2" })
+                            @Html.DropDownList("Gender", (SelectList)ViewBag.GenderList, new { @class = "col-md-3 select2" })
                             @Html.ValidationMessageFor(model => model.GenderCode, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -99,7 +98,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.ReligionCode, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownList("Religion", (SelectList)ViewBag.ReligionList, new { @class = "form-control select2" })
+                            @Html.DropDownList("Religion", (SelectList)ViewBag.ReligionList, new { @class = "col-md-3 select2" })
                             @Html.ValidationMessageFor(model => model.ReligionCode, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -180,6 +179,22 @@
                         </div>
                     </div>
 
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.TrnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TrnDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TrnDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TrnUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TrnUser, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TrnUser, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.ActiveMember, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -200,7 +215,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input id="btnSubmit" type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Save" class="btn btn-success" />
                         </div>
                     </div>
                 </div>
@@ -215,88 +230,3 @@
 
 
 
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
-
-<script type="text/javascript">
-    $("#btnVerify").on("click", function (e) {
-        e.preventDefault();
-
-        $('.loader').show();
-        var _MemberID = $("#MemberID").val();
-        $.ajax({
-            url: "/Member/MemberDetailsByID",
-            cache: false,
-            type: "POST",
-            data: { MemberID: _MemberID },
-            success: function (data) {
-                $('.loader').fadeOut();
-
-                if (data.length > 0) {
-                    bootbox.alert("Member found");
-                }
-                else {
-                    bootbox.alert("Member not found you may proceed");
-                }
-            },
-            error: function (reponse) {
-                $('.loader').fadeOut();
-            }
-        });
-    });
-
-    $("#MemberID").on("focusout", function (e) {
-        e.preventDefault();
-
-        $('.loader').show();
-        var _MemberID = $("#MemberID").val();
-        $.ajax({
-            url: "/Member/MemberDetailsByID",
-            cache: false,
-            type: "POST",
-            data: { MemberID: _MemberID },
-            success: function (data) {
-                $('.loader').fadeOut();
-
-                if (data.length > 0) {
-                    bootbox.alert("Member found");
-                }
-                else {
-                    bootbox.alert("Member not found you may proceed");
-                }
-            },
-            error: function (reponse) {
-                $('.loader').fadeOut();
-            }
-        });
-    });
-
-    $("#btnSubmit").on("click", function (e) {
-        e.preventDefault();
-
-        $('.loader').show();
-        var _MemberID = $("#MemberID").val();
-        $.ajax({
-            url: "/Member/MemberDetailsByID",
-            cache: false,
-            type: "POST",
-            data: { MemberID: _MemberID },
-            success: function (data) {
-
-                if (data.length > 0) {
-                    bootbox.alert("Member found");
-                }
-                else {
-                    $("#CreateForm").submit();
-                }
-
-                $('.loader').fadeOut();
-            },
-            error: function (reponse) {
-                $('.loader').fadeOut();
-            }
-        });
-    });
-
-</script>

@@ -57,9 +57,9 @@ namespace Register.Cls
             }
         }
 
-        public void CreateMember(string MemberID,string NIC,string FullName,string NameWithInitials,string CallingName,DateTime DateOfBirth,
-         string MaritalStatusCode, string GenderCode,string ReligionCode, string Address, string City,string Country,int MobileNo,
-         int HomeTel,string Email,bool GCEOL,bool GCEAL, string OtherQualification,bool ActiveMember, string Comments)
+        public void CreateMember(string MemberID, string NIC, string FullName, string NameWithInitials, string CallingName, DateTime DateOfBirth,
+         string MaritalStatusCode, string GenderCode, string ReligionCode, string Address, string City, string Country, int MobileNo,
+         int HomeTel, string Email, bool GCEOL, bool GCEAL, string OtherQualification, bool ActiveMember, string Comments)
         {
             var idendity = (HttpContext.Current.User as clsPrincipal).Identity as clsIdentity;
 
@@ -130,7 +130,7 @@ namespace Register.Cls
             p[0].Value = MemberID;
 
             using (SqlDataReader dr = SqlHelper.ExecuteReader(clsConnectionString.getConnectionString(),
-                 CommandType.StoredProcedure, "spMemberSelectByMemberID",p))
+                 CommandType.StoredProcedure, "spMemberSelectByMemberID", p))
             {
 
                 List<MemberM> MemberList = new List<MemberM>();
@@ -168,6 +168,143 @@ namespace Register.Cls
                     }
                 }
                 return MemberList;
+            }
+        }
+
+        public MemberM SelectAllMemberByMemberID(string MemberID)
+        {
+            p = new SqlParameter[1];
+
+            p[0] = new SqlParameter("@MemberID", SqlDbType.VarChar, 50);
+            p[0].Value = MemberID;
+
+            using (SqlDataReader dr = SqlHelper.ExecuteReader(clsConnectionString.getConnectionString(),
+                 CommandType.StoredProcedure, "spMemberSelectByMemberID", p))
+            {
+
+                MemberM MemberList = new MemberM();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        MemberList.ID = dr["ID"].ToString();
+                        MemberList.MemberID = dr["MemberID"].ToString();
+                        MemberList.NIC = dr["NIC"].ToString();
+                        MemberList.FullName = dr["FullName"].ToString();
+                        MemberList.NameWithInitials = dr["NameWithInitials"].ToString();
+                        MemberList.CallingName = dr["CallingName"].ToString();
+                        MemberList.DateOfBirth = DateTime.Parse(dr["DateOfBirth"].ToString());
+                        MemberList.MaritalStatusCode = dr["MaritalStatusCode"].ToString();
+                        MemberList.GenderCode = dr["GenderCode"].ToString();
+                        MemberList.ReligionCode = dr["ReligionCode"].ToString();
+                        MemberList.Address = dr["Address"].ToString();
+                        MemberList.City = dr["City"].ToString();
+                        MemberList.Country = dr["Country"].ToString();
+                        MemberList.MobileNo = int.Parse(dr["MobileNo"].ToString());
+                        MemberList.HomeTel = int.Parse(dr["HomeTel"].ToString());
+                        MemberList.Email = dr["Email"].ToString();
+                        MemberList.GCEOL = bool.Parse(dr["GCEOL"].ToString());
+                        MemberList.GCEAL = bool.Parse(dr["GCEAL"].ToString());
+                        MemberList.OtherQualification = dr["OtherQualification"].ToString();
+                        MemberList.TrnDate = DateTime.Parse(dr["TrnDate"].ToString());
+                        MemberList.TrnUser = dr["TrnUser"].ToString();
+                        MemberList.ActiveMember = bool.Parse(dr["ActiveMember"].ToString());
+                        MemberList.Comments = dr["Comments"].ToString();
+
+
+                    }
+                }
+                return MemberList;
+            }
+        }
+
+        public void EditMember(string MemberID, string NIC, string FullName, string NameWithInitials, string CallingName, DateTime DateOfBirth,
+         string MaritalStatusCode, string GenderCode, string ReligionCode, string Address, string City, string Country, int MobileNo,
+         int HomeTel, string Email, bool GCEOL, bool GCEAL, string OtherQualification, bool ActiveMember, string Comments)
+        {
+            var idendity = (HttpContext.Current.User as clsPrincipal).Identity as clsIdentity;
+
+            p = new SqlParameter[21];
+
+            p[0] = new SqlParameter("@MemberID", SqlDbType.VarChar, 50);
+            p[0].Value = MemberID;
+            p[1] = new SqlParameter("@NIC", SqlDbType.VarChar, 100);
+            p[1].Value = NIC;
+            p[2] = new SqlParameter("@FullName", SqlDbType.VarChar, 50);
+            p[2].Value = FullName;
+            p[3] = new SqlParameter("@NameWithInitials", SqlDbType.VarChar, 255);
+            p[3].Value = NameWithInitials;
+            p[4] = new SqlParameter("@CallingName", SqlDbType.VarChar, 50);
+            p[4].Value = CallingName;
+            p[5] = new SqlParameter("@DateOfBirth", SqlDbType.DateTime, 100);
+            p[5].Value = DateOfBirth;
+            p[6] = new SqlParameter("@MaritalStatusCode", SqlDbType.VarChar, 50);
+            p[6].Value = MaritalStatusCode;
+            p[7] = new SqlParameter("@GenderCode", SqlDbType.VarChar, 50);
+            p[7].Value = GenderCode;
+            p[8] = new SqlParameter("@ReligionCode", SqlDbType.VarChar);
+            p[8].Value = ReligionCode;
+            p[9] = new SqlParameter("@Address", SqlDbType.VarChar, 50);
+            p[9].Value = Address;
+            p[10] = new SqlParameter("@City", SqlDbType.VarChar, 50);
+            p[10].Value = City;
+            p[11] = new SqlParameter("@Country", SqlDbType.VarChar, 50);
+            p[11].Value = Country;
+            p[12] = new SqlParameter("@MobileNo", SqlDbType.Int);
+            p[12].Value = MobileNo;
+            p[13] = new SqlParameter("@HomeTel", SqlDbType.Int);
+            p[13].Value = HomeTel;
+            p[14] = new SqlParameter("@Email", SqlDbType.VarChar);
+            p[14].Value = Email;
+            p[15] = new SqlParameter("@GCEOL", SqlDbType.Bit);
+            p[15].Value = GCEOL;
+            p[16] = new SqlParameter("@GCEAL", SqlDbType.Bit);
+            p[16].Value = GCEAL;
+            p[17] = new SqlParameter("@OtherQualification", SqlDbType.VarChar);
+            p[17].Value = OtherQualification;
+            p[18] = new SqlParameter("@TrnUser", SqlDbType.VarChar);
+            p[18].Value = idendity.User.Username;
+            p[19] = new SqlParameter("@ActiveMember", SqlDbType.Bit);
+            p[19].Value = ActiveMember;
+            p[20] = new SqlParameter("@Comments", SqlDbType.VarChar);
+            p[20].Value = Comments;
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(clsConnectionString.getConnectionString(), CommandType.StoredProcedure, "spMemberEdit", p);
+
+
+                //return p[12].Value.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //return ex.Message;
+            }
+        }
+
+        public void DeleteMember(string MemberID)
+        {
+            //var idendity = (HttpContext.Current.User as clsPrincipal).Identity as clsIdentity;
+
+            p = new SqlParameter[1];
+
+            p[0] = new SqlParameter("@MemberID", SqlDbType.VarChar, 50);
+            p[0].Value = MemberID;
+
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(clsConnectionString.getConnectionString(), CommandType.StoredProcedure, "spMemberDelete", p);
+
+
+                //return p[12].Value.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //return ex.Message;
             }
         }
 

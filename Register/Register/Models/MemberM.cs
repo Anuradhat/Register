@@ -23,7 +23,8 @@ namespace Register.Models
         public string CallingName { get; set; }
 
         [DisplayName("Date Of Birth")]
-        [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
         [DisplayName("Marital Status")]

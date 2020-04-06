@@ -31,34 +31,20 @@
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.MemberID)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NIC)
-                        </th>
+                        </th>                        
                         <th>
                             @Html.DisplayNameFor(model => model.NameWithInitials)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CallingName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DateOfBirth)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Address)
-                        </th>
+                        </th>                        
                         <th>
                             @Html.DisplayNameFor(model => model.MobileNo)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Email)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.GCEOL)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.GCEAL)
-                        </th>
+                        
                         <th></th>
                     </tr>
                 </thead>
@@ -68,38 +54,23 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.MemberID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NIC)
-                            </td>
+                            </td>                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.NameWithInitials)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CallingName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DateOfBirth)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </td>
+                            </td>                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.MobileNo)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Email)
-                            </td>
+                            </td>                            
                             <td>
-                                @Html.DisplayFor(modelItem => item.GCEOL)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GCEAL)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                @Html.ActionLink("Edit", "Edit", new { MemberID = item.MemberID }) |
+                                @Html.ActionLink("Details", "Details", new { MemberID = item.MemberID }) |
+                                @Html.ActionLink("Delete", "Delete", new { MemberID = item.MemberID })
                             </td>
                         </tr>
                     }
